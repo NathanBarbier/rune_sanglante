@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Effect index{% endblock %}
+
+{% block body %}
+    <h1>Effect index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Buff</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for effect in effects %}
+            <tr>
+                <td>{{ effect.id }}</td>
+                <td>{{ effect.name }}</td>
+                <td>{{ effect.description }}</td>
+                <td>
+                    <img src="{{ asset('/uploads/image/' ~ effect.image) }}" width="50" height="50" alt="">
+                </td>
+                <td>{{ effect.buff ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_effect_show', {'id': effect.id}) }}">show</a>
+                    <a href="{{ path('app_effect_edit', {'id': effect.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_effect_new') }}">Create new</a>
+{% endblock %}
